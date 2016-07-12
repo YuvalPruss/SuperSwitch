@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs" ng-if='!isArrEmty(switches)'>
+	<li ng-repeat='switch in switches' role="presentation" ng-click='setSwitch(switch.id)' ng-class="{active: isSwitch(switch.id)}">
+  		<a href="">
+  			{{switch.name}}
+		</a>
+	</li>
+</ul>
+
+<div class='switch_panel'>
+
+	<div class='panel panel-default' ng-repeat="(module, module_ports) in ports | groupBy: 'module_number'" ng-if='!isArrEmty(ports)'>
+		<h5>מודול {{module}}</h5>
+		<div ng-repeat="port in module_ports">
+			<button type="button" class="port btn btn-default" ng-click="showPort(module, port.port_number)">
+				{{port.port_number}}
+			</button>
+			{{port.system}} | {{port.description}}
+		</div>
+	</div>
+
+	<div ng-if='isArrEmty(ports)'>
+		</br>
+		אין פורטים להצגה!
+	</div>
+
+</div>
+
+<div ng-if='isArrEmty(switches)'>
+	אין מתגים ופורטים להצגה!
+</div>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>אתר הפורטים</title>
+	<!--JS-->
+	<script src='js/cdn/angular.js'></script>
+	<script src='js/cdn/angular-route.js'></script>
+	<script src='js/cdn/jquery-3.0.0.min.js'></script>
+	<script src='js/cdn/bootstrap.min.js'></script>
+	<script src='js/cdn/jquery-ui.min.js'></script>
+	<script src='js/cdn/ui-bootstrap-tpls-1.3.3.min.js'></script>
+	<script src='js/cdn/angular-filter.js'></script>
+
+	<script src='js/index.js'></script>
+	<script src='js/mainController.js'></script>
+	<script src='js/addController.js'></script>
+	<script src='js/deleteController.js'></script>
+	<script src='js/aboutController.js'></script>
+
+	<!--CSS-->
+	<link rel='stylesheet' type='text/css' href='css/cdn/bootstrap.min.css' />
+	<!--<link rel="stylesheet" href='css/cdn/bootstrap-theme.min.css' />-->
+
+	<link rel='stylesheet' type='text/css' href='css/index.css' />
+</head>
+<body ng-app='mainApp' dir='rtl'>
+	<div id='main' class='container'>
+		<!-- Nav-Bar View -->
+		<div id='main' class="container">
+			<nav class="navbar-fluid navbar-default navbar-fixed-top">
+				<div class="container">
+					<a class="navbar-right navbar-brand" href="#">אתר הפורטים</a>
+					<p class="navbar-right navbar-text">אתר תיעוד המתגים בצניפים</p>
+					
+					<p class="navbar-left navbar-text">
+						<a href="#/add">הוספה</a> | 
+						<a href="#/delete">מחיקה</a> | 
+						<a href="#/about">אודות</a>
+					</p>
+				</div>
+			</nav>
+
+		<!-- Main View -->
+		<div class='col-md-offset-2 col-md-8'>
+			<div ng-view>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

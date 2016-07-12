@@ -1,0 +1,102 @@
+<ul class="nav nav-tabs">
+	<li role="presentation" ng-click='setPanel(1)' ng-class="{active: isPanel(1)}"><a href="">הוסף פורט</a></li>
+	<li role="presentation" ng-click='setPanel(2)' ng-class="{active: isPanel(2)}"><a href="">הוסף מתג</a></li>
+</ul>
+
+<div class='managment_panel'>
+	<!--Panel 1-->
+	<div ng-if='isPanel(1)'>
+		<h4>
+			הוסף פורט
+		</h4>
+
+		<form ng-submit='addPort()' ng-if='!isArrEmty(switches)'>
+			<p class='text-success'>
+				{{submit_message_add_port}}
+			</p>
+
+			<table>
+				<tr>
+					<td>
+						מתג
+					</td>
+					<td>
+		    			<div class="btn-group">
+							<label ng-repeat="switch in switches | orderBy: '-id'" class="btn btn-success" ng-model="port.switch" uib-btn-radio="{{switch.id}}">{{switch.name}}
+							</label>
+		    			</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						מודול
+					</td>
+					<td>
+						<input type='number' max='100' min='0' ng-model='port.module_number' placeholder='מספר מודול' class='form-control' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						פורט
+					</td>
+					<td>
+						<input type='number' max='100' min='0' ng-model='port.port_number' placeholder='מספר פורט' class='form-control' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						מערכת
+					</td>
+					<td>
+						<input rows='5' cols='80' type='text' ng-model='port.system' placeholder='המערכת אותה משמש הפורט' class='form-control' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						תיאור הפורט
+					</td>
+					<td>
+						<textarea rows='5' cols='80' type='text' ng-model='port.description' placeholder='כתוב תיאור על הפורט' class='form-control textarea-fix'></textarea>
+					</td>
+				</tr>
+			</table>
+
+			<center>
+				<input type='submit' value='הוסף פורט' class='btn btn-success' />
+			</center>
+		</form>
+	
+		<div ng-if='isArrEmty(switches)'>
+			אין מתגים, ולכן לא ניתן להוסיף פורטים!
+		</div>
+
+	</div>
+	<!--Panel 1 Done-->
+	<!--Panel 2-->
+	<div ng-show='isPanel(2)'>
+		<h4>
+			הוסף מתג
+		</h4>
+
+		<form class='form-auth' ng-submit='addSwitch()'>
+			<p class='text-success'>
+				{{submit_message_add_switch}}
+			</p>
+
+			<table>
+				<tr>
+					<td>שם</td>
+					<td>
+						 <input type='text' ng-model='switch.name' placeholder='שם' class='form-control' />		
+					</td>
+				</tr>
+			</table>
+
+			<center>
+				<input type='submit' value='הוסף מתג' class='btn btn-success' />
+			</center>
+
+		</form>
+	</div>
+	<!--Panel 2 Done-->
+</div>

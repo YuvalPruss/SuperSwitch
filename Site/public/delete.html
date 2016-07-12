@@ -1,0 +1,122 @@
+<ul class="nav nav-tabs">
+	<li role="presentation" ng-click="setPanel(1)" ng-class="{active: isPanel(1)}"><a href="">מחק מתג</a></li>
+	<li role="presentation" ng-click="setPanel(2)" ng-class="{active: isPanel(2)}"><a href="">מחק מודול</a></li>
+	<li role="presentation" ng-click="setPanel(3)" ng-class="{active: isPanel(3)}"><a href="">מחק פורט</a></li>
+</ul>
+
+
+<div class=''>
+	<!-- Panel 1-->
+	<div ng-if='isPanel(1)'>
+		<h4>מחק מתג</h4>
+
+		<form ng-submit='deleteSwitch()' ng-if='!isArrEmty(switches)'>
+			<p class='text-warning'>
+				{{submit_message_delete_switch}}
+			</p>
+
+			<table>
+				<tr>
+					<td>
+						בחר מתג
+					</td>
+					<td>
+		    			<div class="btn-group">
+							<label ng-repeat="switch in switches | orderBy: '-id'" class="btn btn-danger" ng-model="switch_delete.id" uib-btn-radio="{{switch.id}}">{{switch.name}}
+							</label>
+		    			</div>
+					</td>
+				</tr>
+			</table>
+
+			<center>
+				<input type='submit' value='מחק מתג' class='btn btn-danger'></input>				
+			</center>
+		</form>
+
+		<!--No Options-->
+		<div ng-if='isArrEmty(switches)'>
+			אין מתגים למחיקה!
+		</div>
+		<!--No Options-->
+
+	</div>
+	<!--Panel 1 Done-->
+	<!--Panel 2-->
+	<div ng-if='isPanel(2)'>
+		<h4>מחק מודול</h4>
+
+		<form ng-submit='deleteModule()' ng-if='!isArrEmty(ports)'>
+			<p class='text-warning'>
+				{{submit_message_delete_module}}
+			</p>
+			<table>
+				<tr>
+					<td>
+						בחר מודול
+					</td>
+					<td>
+						<div class='panel panel-default' ng-repeat="(switch, switch_ports) in ports | groupBy: 'switch'">
+		    				{{switchNumberToSwitchName(switch)}}
+		    				<input type='button' class='btn btn-danger module'
+		    				ng-class="{active: isModule(switch, module_number)}"
+		    				ng-repeat="(module_number, module_ports) in switch_ports | groupBy: 'module_number'"
+		    				ng-click="setModule(switch, module_number)"
+		    				ng-value="'מודול ' + {{module_number}}"></input>
+		    			</div>
+					</td>
+				</tr>
+			</table>
+			<center>
+				<input type='submit' class='btn btn-danger' value='מחק מודול'></input>
+			</center>
+		</form>
+
+		<!--No Options-->
+		<div ng-if='isArrEmty(ports)'>
+			אין מודולים למחיקה!
+		</div>
+		<!--No Options-->
+	</div>
+	<!--Panel 2 Done-->
+	<!--Panel 3-->
+	<div ng-if='isPanel(3)'>
+		<h4>מחק פורט</h4>
+
+		<form ng-submit='deletePort()' ng-if='!isArrEmty(ports)'>
+			<p class='text-warning'>
+				{{submit_message_delete_port}}
+			</p>
+
+			<table>
+				<tr>
+					<td>
+						בחר פורט
+					</td>
+					<td>
+						<div class='panel panel-default' ng-repeat="(switch, switch_ports) in ports | groupBy: 'switch'">
+		    				{{switchNumberToSwitchName(switch)}}
+		    				<div class='panel panel-default' ng-repeat="(module_number, module_ports) in switch_ports | groupBy: 'module_number'">
+		    					מודול {{module_number}}
+		    					<input class='btn btn-danger' type='button'
+		    					ng-repeat="port in module_ports" ng-value="port.port_number"
+		    					ng-class="{active: isPort(switch, module_number, port.port_number)}"
+		    					ng-click='setPort(switch, module_number, port.port_number)'></input>
+		    				</div>
+					</td>
+				</tr>
+			</table>
+
+			<center>
+				<input type='submit' class='btn btn-danger' value='מחק פורט'></input>
+			</center>
+		</form>
+
+		<!--No Options-->
+		<div ng-if='isArrEmty(ports)'>
+			אין פורטים למחיקה!
+		</div>
+		<!--No Options-->
+	</div>
+	<!--Panel 3 Done-->
+</div>
