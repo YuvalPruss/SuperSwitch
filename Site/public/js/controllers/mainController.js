@@ -1,10 +1,5 @@
-app.controller("mainContoller", function($scope, $http, $rootScope, $location) {
-	$scope.isArrEmty = function(arr) {
-		if(arr.length == 0) {
-			return true;
-		}
-		return false;
-	};
+app.controller("mainContoller", function($scope, $http, $rootScope, $location, checkArr) {
+	$scope.isArrEmty = checkArr.isArrayEmpty;
 
 	$scope.switches = [];
 	$scope.ports = [];
