@@ -24,12 +24,12 @@ app.controller('addController', function($scope, $http, $rootScope, $location, c
 
 	$scope.switches = [];
 
-	$http.get('/actions/getSwitches').success(function(data) {
+	$http.get('/show/getSwitches').success(function(data) {
 		$scope.switches = data;
 	});
 
 	$scope.addPort = function() {
-		$http.post('/actions/addPort', {port: $scope.port}).success(function(data) {
+		$http.post('/add/addPort', {port: $scope.port}).success(function(data) {
 			if(data == "true") {
 				$scope.submit_message_add_port = "הפורט נוצר בהצלחה!";
 				$scope.port = {
@@ -54,7 +54,7 @@ app.controller('addController', function($scope, $http, $rootScope, $location, c
 
 	$scope.addSwitch = function() {
 		if( $scope.switch.name != '' ) {
-			$http.post('/actions/addSwitch', {switch: $scope.switch}).success(function(data) {
+			$http.post('/add/addSwitch', {switch: $scope.switch}).success(function(data) {
 				if(data == "true") {
 					$scope.submit_message_add_switch = "המתג נוצר בהצלחה!";
 					$scope.switch = {

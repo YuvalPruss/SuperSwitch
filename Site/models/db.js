@@ -25,8 +25,9 @@ DBHandler.prototype.connect = function() {
 };
 
 DBHandler.prototype.runSQL = function(sql) {
+	var con = this.connection;
 	return new Promise(function(resolve, reject) {
-		this.connection.query(sql, function(err) {
+		con.query(sql, function(err) {
 			if(err){ return reject(err); }
 			return resolve();
 		});

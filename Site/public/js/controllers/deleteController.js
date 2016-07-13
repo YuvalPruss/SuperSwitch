@@ -18,12 +18,12 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 	$scope.switches = [];
 	$scope.switch_delete = {id: ''};
 
-	$http.get('/actions/getSwitches').success(function(data) {
+	$http.get('/show/getSwitches').success(function(data) {
 		$scope.switches = data;
 	});
 
 	$scope.deleteSwitch = function() {
-		$http.post('/actions/deleteSwitch', {switch: $scope.switch_delete}).success(function(data) {
+		$http.post('/delete/deleteSwitch', {switch: $scope.switch_delete}).success(function(data) {
 			if(data == 'true') {
 				//Delete the switch from the array
 				for (var i = $scope.switches.length - 1; i >= 0; i--) {
@@ -61,7 +61,7 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 		$scope.switch_number = switchNumber;
 	};
 
-	$http.get('/actions/getAllPorts').success(function(data) {
+	$http.get('/show/getAllPorts').success(function(data) {
 		$scope.ports = data;
 	});
 
@@ -74,7 +74,7 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 	};
 
 	$scope.deleteModule = function() {
-		$http.post('/actions/deleteModule', {module: $scope.module_number, switch: $scope.switch_number}).success(function(data) {
+		$http.post('/delete/deleteModule', {module: $scope.module_number, switch: $scope.switch_number}).success(function(data) {
 			if(data == 'true') {
 				$scope.submit_message_delete_module = 'המודול נמחק בהצלחה!';
 
@@ -110,7 +110,7 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 	};
 
 	$scope.deletePort = function() {
-		$http.post('/actions/deletePort', {port: $scope.choosen_port}).success(function(data) {
+		$http.post('/delete/deletePort', {port: $scope.choosen_port}).success(function(data) {
 			if(data == "true") {
 				$scope.submit_message_delete_port = "הפורט נמחק בהצלחה";
 
