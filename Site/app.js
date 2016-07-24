@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var delete_actions = require('./routes/delete');
 var show_actions = require('./routes/show');
 var add_actions = require('./routes/add');
+var search_actions = require('./routes/search');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/add', add_actions);
 app.use('/delete', delete_actions);
 app.use('/show', show_actions);
+app.use('/search', search_actions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

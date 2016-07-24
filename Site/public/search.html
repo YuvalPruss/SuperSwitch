@@ -1,0 +1,47 @@
+<center>	
+	<input type='text' ng-model='search_string' placeholder='הקלד טקסט חיפוש' class='form-control' ng-change='search()'/>
+	<h4>
+		{{search_notes}}
+	</h4>
+
+	<table class="table table-hover table_special" ng-if="!isArrEmty(ports)">
+		<tr>
+			<th>
+				מתג
+			</th>
+			<th>
+				מודול
+			</th>
+			<th>
+				פורט
+			</th>
+			<th>
+				מערכת
+			</th>
+			<th>
+				תיאור הפורט
+			</th>
+		</tr>
+		<tr ng-repeat='port in ports'>
+			<td>
+				{{switchNumberToSwitchName(port.switch)}}
+			</td>
+			<td>
+				{{port.module_number}}
+			</td>
+			<td>
+				{{port.port_number}}
+			</td>
+			<td>
+				{{port.system}}
+			</td>
+			<td>
+				{{port.description}}
+			</td>
+		</tr>
+	</table>
+
+	<h1 ng-if="isArrEmty(ports) && search_string != ''">
+		אין תוצאות לחיפוש!
+	</h1>
+</center>

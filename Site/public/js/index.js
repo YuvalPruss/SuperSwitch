@@ -8,6 +8,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'main.html',
 		controller: 'mainContoller'
 	})
+	.when('/search', {
+		templateUrl: 'search.html',
+		controller: 'searchController'
+	})
 	.when('/add', {
 		templateUrl: 'add.html',
 		controller: 'addController'

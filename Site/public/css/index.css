@@ -68,3 +68,7 @@ td{
 .module{
 	margin: 3px;
 }
+
+.table_special td, .table_special th{
+	text-align: center;
+}
