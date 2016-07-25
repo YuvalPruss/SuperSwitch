@@ -1,4 +1,4 @@
-app.controller('searchController', function($scope, $http, $rootScope, $location, checkArr) {
+app.controller('searchController', function($scope, $http, $rootScope, $location, checkArr, db) {
 	$scope.isArrEmty = checkArr.isArrayEmpty;
 
 	$scope.search_notes = "אנא הקלד חיפוש כלשהו";
@@ -6,8 +6,11 @@ app.controller('searchController', function($scope, $http, $rootScope, $location
 	$scope.ports = [];
 	$scope.switches = [];
 
-	$http.get('/show/getSwitches').success(function(data) {
-		$scope.switches = data;
+	db.getSwitches()
+	.then(function(result) {
+		$scope.switches = result;
+	}, function(error) {
+		console.log(error);
 	});
 
 	$scope.search = function() {

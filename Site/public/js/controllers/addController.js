@@ -1,4 +1,4 @@
-app.controller('addController', function($scope, $http, $rootScope, $location, checkArr) {
+app.controller('addController', function($scope, $http, $rootScope, $location, checkArr, db) {
 	$scope.isArrEmty = checkArr.isArrayEmpty;
 	
 	$scope.panel = 1;
@@ -24,8 +24,11 @@ app.controller('addController', function($scope, $http, $rootScope, $location, c
 
 	$scope.switches = [];
 
-	$http.get('/show/getSwitches').success(function(data) {
-		$scope.switches = data;
+	db.getSwitches()
+	.then(function(result) {
+		$scope.switches = result;
+	}, function(error) {
+		console.log(error);
 	});
 
 	$scope.addPort = function() {

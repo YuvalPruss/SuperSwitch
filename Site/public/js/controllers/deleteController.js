@@ -1,4 +1,4 @@
-app.controller('deleteController', function($scope, $http, $rootScope, $location , checkArr) {
+app.controller('deleteController', function($scope, $http, $rootScope, $location , checkArr, db) {
 	$scope.isArrEmty = checkArr.isArrayEmpty;
 
 	$scope.panel = 1;
@@ -12,15 +12,19 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 	};
 
 
-	
 	//Delete Switch
 	$scope.submit_message_delete_switch = '';
+	
 	$scope.switches = [];
-	$scope.switch_delete = {id: ''};
 
-	$http.get('/show/getSwitches').success(function(data) {
-		$scope.switches = data;
+	db.getSwitches()
+	.then(function(result) {
+		$scope.switches = result;
+	}, function(error) {
+		console.log(error);
 	});
+
+	$scope.switch_delete = {id: ''};
 
 	$scope.deleteSwitch = function() {
 		$http.post('/delete/deleteSwitch', {switch: $scope.switch_delete}).success(function(data) {
@@ -49,6 +53,15 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 	//Delete Module
 	$scope.submit_message_delete_module = '';
 	$scope.ports = [];
+
+	db.getPorts()
+	.then(function(result) {
+		console.log(result);
+		$scope.ports = result;
+	}, function(error) {
+		console.log(error);
+	});
+
 	$scope.module_number = 0;
 	$scope.switch_number = 0;
 
@@ -61,9 +74,7 @@ app.controller('deleteController', function($scope, $http, $rootScope, $location
 		$scope.switch_number = switchNumber;
 	};
 
-	$http.get('/show/getAllPorts').success(function(data) {
-		$scope.ports = data;
-	});
+	
 
 	$scope.switchNumberToSwitchName = function(switchNumber) {
 		for (var i = $scope.switches.length - 1; i >= 0; i--) {
