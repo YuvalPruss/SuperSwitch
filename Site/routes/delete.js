@@ -8,7 +8,7 @@ mydb.connect();
 router.post('/deleteSwitch', function(req, res) {
 	var switch_number = String(req.body.switch.id);
 
-	var sql = 'delete from ports where switch = ' + switch_number;
+	var sql = 'delete from switches where id = ' + switch_number;
 	var sql2 = 'delete from ports where switch = ' + switch_number;
 	
 	mydb.runSQL(sql)
